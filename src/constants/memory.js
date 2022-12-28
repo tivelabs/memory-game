@@ -1,5 +1,5 @@
 const memoryConstants = {
-  hiddenCardSymbol: '*',
+  hiddenCardSymbol: { name: '*' },
   categories: ['animals', 'numbers'],
   levels: [3, 6, 9],
 };

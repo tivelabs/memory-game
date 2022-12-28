@@ -25,7 +25,7 @@ class MemoryGame {
     this.#cards = new CardCollection()
     this.#initCards(itemsList);
     this.#gameInitialized = true;
-    renderUtils.renderCards(this.#cards.getCards(), this.#renderCards, this.#xLength, this.#yLength)
+    renderUtils.renderCards(this.#renderCards)
   };
 
   handleCardSelected (x, y) {
@@ -34,7 +34,8 @@ class MemoryGame {
       return;
     }
     this.#cards.selectCard(`${x}_${y}`);
-    renderUtils.renderCards(this.#cards.getCards(), this.#renderCards, this.#xLength, this.#yLength)
+    this.#updateRenderCard(x, y)
+    renderUtils.renderCards(this.#renderCards)
     this.#handleCardsMatch(x, y);
     this.#verifyWinner();
   };
@@ -67,6 +68,7 @@ class MemoryGame {
       for (let j = 0; j < this.#yLength; j++) {
         this.#cards.setCard(`${i}_${j}`, new Card(randomItems[count]))
         count++;
+        this.#updateRenderCard(i, j);
       }
     }
   };
@@ -75,7 +77,9 @@ class MemoryGame {
     this.#cards.unselectCard(`${key1}`);
     this.#cards.unselectCard(`${key2}`);
     this.#cards.clearCardsSelected()
-    renderUtils.renderCards(this.#cards.getCards(), this.#renderCards, this.#xLength, this.#yLength)
+    this.#updateRenderCard(key1.split('_')[0], key1.split('_')[1]);
+    this.#updateRenderCard(key2.split('_')[0], key2.split('_')[1]);
+    renderUtils.renderCards(this.#renderCards)
   };
 
   #handleCardsMatch (x, y) {
@@ -84,7 +88,9 @@ class MemoryGame {
       return;
     }
     if (this.#cards.areTwinCards(`${x}_${y}`, selected.selected2)){
-      renderUtils.renderCards(this.#cards.getCards(), this.#renderCards, this.#xLength, this.#yLength)
+      this.#updateRenderCard(x, y)
+      this.#updateRenderCard(selected.selected2.split('_')[0], selected.selected2.split('_')[1])
+      renderUtils.renderCards(this.#renderCards)
       renderUtils.renderMatch();
     } else {
       renderUtils.renderNoMatch();
@@ -118,6 +124,10 @@ class MemoryGame {
       isMatched === true ||
       this.#isThereAWinner);
   };
+
+  #updateRenderCard (x, y) {
+    this.#renderCards[x][y] = this.#cards.getCard(`${x}_${y}`).getBack().name;
+  }
 };
 
 export default MemoryGame;

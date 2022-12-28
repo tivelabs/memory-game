@@ -16,18 +16,9 @@ const renderLevel = () => {
   console.log('Enter [1] for easy, [2] for medium, [3] for hard')
 };
 
-const renderCards = (cards, render, x, y) => {
+const renderCards = (cards) => {
   console.log('-------------------------------');
-  for (let i = 0; i < x; i++) {
-    for (let j = 0; j < y; j++) {
-      if (typeof cards[`${i}_${j}`].getBack() !== 'string') {
-        render[i][j] = cards[`${i}_${j}`].getBack().name;
-      } else {
-        render[i][j] = cards[`${i}_${j}`].getBack();
-      }    
-    }
-  }
-  console.table(render)
+  console.table(cards)
 };
 
 const renderMatch = () => {
