@@ -1,3 +1,13 @@
-const { MemoryGame } = require("./src/MemoryGame.js");
+import MemoryGame from "./src/MemoryGame.js";
 
-exports.MemoryGame = MemoryGame;
+let memoryGame;
+
+export function initGame(category, level) {
+  memoryGame = new MemoryGame();
+  memoryGame.initGame(category, level);
+};
+
+export function selectCard(x, y) {
+    memoryGame.handleCardSelected(x, y);  
+    return memoryGame.getIsThereAWinner();
+};
