@@ -44,10 +44,7 @@ class Card {
   };
 
   hasMatchedCard (twinId) {
-    let match = false;
-    this.getBack().id === twinId
-      ? (match = true)
-      : (match = false);
+    let match = this.getBack().id === twinId;
     if (match) {
       this.#setMatched(match);
       return match;

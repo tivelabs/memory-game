@@ -8,12 +8,12 @@ const renderTitle = () => {
 
 const renderCategory = () => {
   console.log('Choose a category:\n')
-  console.log(`Enter [1] for ${memoryConstants.categories[0]}, and [2] for ${memoryConstants.categories[1]}`)
+  console.log(`Enter [1] for ${memoryConstants.categories[0].name}, and [2] for ${memoryConstants.categories[1].name}`)
 };
 
 const renderLevel = () => {
   console.log('Choose the game level:\n')
-  console.log('Enter [1] for easy, [2] for medium, [3] for hard')
+  console.log(`Enter [${memoryConstants.levels[0].menuOption}] for the easy level, [${memoryConstants.levels[1].menuOption}] for the medium level, and [${memoryConstants.levels[2].menuOption}] for the hard level`)
 };
 
 const renderCards = (cards) => {
