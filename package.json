@@ -1,9 +1,9 @@
 {
   "type": "module",
-  "name": "memory-game",
+  "name": "@tive-labs/memory-game",
   "version": "0.1.0",
-  "description": "console memory game",
-  "main": "app.js",
+  "description": "memory game library",
+  "main": "index.js",
   "scripts": {
     "test": "jest"
   },
@@ -12,5 +12,13 @@
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.20.7",
     "jest": "^29.3.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tivelabs/memory-game.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tivelabs/memory-game/issues"
+  },
+  "homepage": "https://github.com/tivelabs/memory-game#readme"
 }
