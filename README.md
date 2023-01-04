@@ -1,46 +1,74 @@
 # memory-game
 
-## installing dependencies
+## installing library
 
-- All dependencies will be installed using the following command:
+    - To install memory-game library in your project just run the following command:
 
-```
-npm install
-```
+    ```
+    npm i @tive-labs/memory-game
+    ```
 
-## Running the tests
+## Using memory-game library
 
-- Just run the following command:
+1. ### Import the library
 
-```
-npm test
-```
+    - At the beginning of the js file in which you are going to use the library import as follows:
 
-## Running the app
+    ```js
+    import {initGame, selectCard} from @tive-labs/memory-game
+    ```
 
-- In the root of the applications folder runs the following command:
+2. ### initGame
 
-```
-node app.js
-```
+    - initGame receives two parameters, category and level.
+        - Category must be 'animals' or 'numbers'
+        - Level must be 'easy' or 'medium' or 'hard'
 
-## Playing the game
+    ```js
+    const memoryGame = initGame('animals', 'easy');
+    ```
 
-1. ### Select a Category
+    - initGame returns an object with a 2d array of hidden cards, and the length of the array (xLength and yLength):
 
-- Choose between 'animals', and 'numbers' categories typing 1 to choose animals and 2 to choose numbers, then press Intro.
+    ```js
+    {
+        cards,
+        xLength,
+        yLength
+    }
+    ```
 
+3. ### selectCard
 
-2. ### Select a game level
+    - selectCard receives two parameters, position x and position y.
+        - x must be a number representing the x position (vertival position) on the 2d array.
+        - y must be a number representing the y position (horizontal position) on the 2d array.
 
-- Choose between 'easy', 'medium', and 'hard' levels typing 1 to choose the easy level, 2 to choose the medium level, and 3 to choose the hard level, then press Intro.
+    ```js
+    const selected = selectCard(0, 1);
+    ```
 
+- selectCard returns an object with three properties:
 
-3. ### Select cards
+    ```js
+    {
+        cardData,
+        cardMatch,
+        isThereAWinner
+    }
+    ```
 
-- After setting the category and level, the game shows a card grid hiding the card's values.
-- To select a card, just type an index coordinate in the format x,y 
-    - The index coordinate x should be a number between the vertical indexes in the grid.
-    - The index coordinate y should be a number between the horizontal indexes in the grid.
-- After introduce a index coordinate (x,y) press Intro.
-- Continue introducing coordinates to select cards until all card matches are discovered.
+    - cardData: Contains an object with the data of the discovered card (id, name, shortName)
+    - cardMatch: Contains an object with a boolean value (isNewMatched) that indicates if exist a new card match, and an object (matchedCards) with the positions of the matched cards (x_y):
+    
+    ```js
+    {
+        isNewMatched,
+        matchedCards: {
+            firstCard,
+            lastCard
+        }
+    }
+    ```
+
+    - isThereAWinner: Contains a boolean value indicating if the player won the game. 
