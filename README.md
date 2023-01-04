@@ -1,6 +1,6 @@
 # memory-game
 
-## installing library
+## Installing memory-game library
 
     - To install memory-game library in your project just run the following command:
 
@@ -41,14 +41,14 @@
 3. ### selectCard
 
     - selectCard receives two parameters, position x and position y.
-        - x must be a number representing the x position (vertival position) on the 2d array.
+        - x must be a number representing the x position (vertical position) on the 2d array.
         - y must be a number representing the y position (horizontal position) on the 2d array.
 
     ```js
     const selected = selectCard(0, 1);
     ```
 
-- selectCard returns an object with three properties:
+    - selectCard returns an object with three properties:
 
     ```js
     {
@@ -72,3 +72,19 @@
     ```
 
     - isThereAWinner: Contains a boolean value indicating if the player won the game. 
+
+4. ### Handling Errors
+
+    - Use 'try catch' to handle errors:
+
+    ```js
+    try {
+        const memoryGame = initGame('animals', 'easy');
+    } catch(error) {
+        console.log(error);
+    }
+    ```
+
+## Class Diagram
+
+![classes](./img/classDiagram.png)

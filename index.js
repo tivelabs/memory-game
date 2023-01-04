@@ -8,13 +8,11 @@ export function initGame(category, level) {
   let validLevel = null;
   try {
     validCategory = validationUtils.validCategory(category);
-    console.log('validCategory: ', validCategory)
   } catch(error) {
     throw new Error(error);
   }
   try {
     validLevel = validationUtils.validLevel(level);
-    console.log('validLevel: ', validLevel)
   } catch(error) {
     throw new Error(error);
   }
