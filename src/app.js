@@ -7,11 +7,12 @@ const startGame = async () => {
   let category = null;
   let level = null;
   let validation = {};
+  let cardSelected = null;
   renderUtils.renderTitle();
   renderUtils.renderCategory();
   do {
     let inputCategory = parseInt(await inputs.askCategory());
-    category = validationUtils.validCategory(inputCategory);
+    category = validationUtils.validMenuCategory(inputCategory);
     !category && renderUtils.renderInvalid('category');
   } while (!category);
   console.clear();
@@ -19,7 +20,7 @@ const startGame = async () => {
 
   do {
     let inputLevel = parseInt(await inputs.askLevel())
-    level = validationUtils.validLevel(inputLevel);
+    level = validationUtils.validMenuLevel(inputLevel);
     !level && renderUtils.renderInvalid('level');      
   } while (!level);
   console.clear();
@@ -28,11 +29,13 @@ const startGame = async () => {
 
   do {
     let position = await inputs.askCoordinates();
-    validation = validationUtils.validXY(position, memoryGame.getXLength(), memoryGame.getYLength());
-    validation.valid ? 
-        memoryGame.handleCardSelected(validation.positionX, validation.positionY) :
-        renderUtils.renderInvalid('[x,y] index coordinates')    
-  } while (!memoryGame.getIsThereAWinner() || !validation.valid);
+    validation = validationUtils.validMenuXY(position, memoryGame.getXLength(), memoryGame.getYLength());
+    if (validation.valid) { 
+      cardSelected = memoryGame.handleCardSelected(validation.positionX, validation.positionY)
+    } else {
+      renderUtils.renderInvalid('[x,y] index coordinates')    
+    }
+  } while (!cardSelected.isThereAWinner || !validation.valid);
   renderUtils.renderWin();
   process.exit() 
 };

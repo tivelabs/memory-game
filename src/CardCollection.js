@@ -36,7 +36,7 @@ class CardCollection {
 
   clearCardsSelected () {
     this.#cardsSelected = [];
-    this.#setSelected(0);
+    this.#selected = 0;
   };
 
   cardsLength () {
@@ -51,6 +51,7 @@ class CardCollection {
     this.cards[key].selectCard();
     this.#cardsSelectedAdd();
     this.#setCardsSelected(key)
+    return this.cards[key].getBack();
   };
 
   unselectCard (key) {
@@ -64,10 +65,6 @@ class CardCollection {
     return twins;
   };
 
-  #setSelected (data) {
-    this.#selected = data
-  };
-  
   #setCardsSelected (key) {
     this.#cardsSelected.push(key)
   };

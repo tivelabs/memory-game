@@ -2,6 +2,7 @@ import arrayUtils from './utils/arrayUtils.js';
 import renderUtils from './utils/renderUtils.js';
 import Card from './Card.js';
 import CardCollection from './CardCollection.js';
+import memoryConstants from './constants/memory.js';
 
 class MemoryGame {
   #gameInitialized;
@@ -26,18 +27,20 @@ class MemoryGame {
     this.#initCards(itemsList);
     this.#gameInitialized = true;
     renderUtils.renderCards(this.#renderCards)
+    return {cards: this.#renderCards, xLength: this.#xLength, yLength: this.#yLength};
   };
 
   handleCardSelected (x, y) {
     renderUtils.renderSelected(x, y);
     if (!this.#isSelectedCardValid(x, y)) {
-      return;
+      return { cardData: null, cardMatch: null, isThereAWinner: this.#isThereAWinner };
     }
-    this.#cards.selectCard(`${x}_${y}`);
+    const cardData = this.#cards.selectCard(`${x}_${y}`);
     this.#updateRenderCard(x, y)
     renderUtils.renderCards(this.#renderCards)
-    this.#handleCardsMatch(x, y);
+    const cardMatch = this.#handleCardsMatch(x, y);
     this.#verifyWinner();
+    return { cardData, cardMatch, isThereAWinner: this.#isThereAWinner };
   };
 
   getIsThereAWinner () {
@@ -58,8 +61,8 @@ class MemoryGame {
 
   #initCards (randomItems) {
     let count = 0;
-    this.#xLength = randomItems.length/3;
-    this.#yLength = randomItems.length/this.#xLength;
+    this.#yLength = memoryConstants.hLength;
+    this.#xLength = randomItems.length/this.#yLength;
     this.#renderCards = new Array(this.#xLength);
     for (let i = 0; i < this.#renderCards.length; i++) {
       this.#renderCards[i] = new Array(this.#yLength);
@@ -92,10 +95,13 @@ class MemoryGame {
       this.#updateRenderCard(selected.selected2.split('_')[0], selected.selected2.split('_')[1])
       renderUtils.renderCards(this.#renderCards)
       renderUtils.renderMatch();
+      this.#clearSelectedCards(selected.selected1, selected.selected2);
+      return { isNewMatched: true, matchedCards: { firstCard: selected.selected2, lastCard: `${x}_${y}` }};
     } else {
       renderUtils.renderNoMatch();
+      this.#clearSelectedCards(selected.selected1, selected.selected2);
+      return { isNewMatched: false }
     }
-    this.#clearSelectedCards(selected.selected1, selected.selected2);
   };
 
   #verifyWinner () {
