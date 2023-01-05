@@ -25,11 +25,11 @@ const startGame = async () => {
   } while (!level);
   console.clear();
   const memoryGame = new MemoryGame();
-  memoryGame.initGame(category, level);
+  const init = memoryGame.initGame(category, level);
 
   do {
     let position = await inputs.askCoordinates();
-    validation = validationUtils.validMenuXY(position, memoryGame.getXLength(), memoryGame.getYLength());
+    validation = validationUtils.validMenuXY(position, init.xLength, init.yLength);
     if (validation.valid) { 
       cardSelected = memoryGame.handleCardSelected(validation.positionX, validation.positionY)
     } else {

@@ -59,7 +59,7 @@ const validMenuCategory = (inputCategory) => {
 const validMenuLevel = (inputLevel) => {
   let level = null;
   memoryConstants.levels.forEach((item, idx) => {
-    item.menuOption === inputLevel && (level = item.value); 
+    item.menuOption === inputLevel && (level = item.name); 
   })
   return level;
 };

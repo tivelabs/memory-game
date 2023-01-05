@@ -3,6 +3,7 @@ import renderUtils from './utils/renderUtils.js';
 import Card from './Card.js';
 import CardCollection from './CardCollection.js';
 import memoryConstants from './constants/memory.js';
+import validationUtils from './utils/validationUtils.js';
 
 class MemoryGame {
   #gameInitialized;
@@ -22,38 +23,34 @@ class MemoryGame {
   };
 
   initGame (itemsType, levelValue) {
-    const itemsList = arrayUtils.getGameItems(itemsType, levelValue);
+    const validCategory = validationUtils.validCategory(itemsType);
+    const validLevel = validationUtils.validLevel(levelValue);
+    const itemsList = arrayUtils.getGameItems(validCategory, validLevel);
     this.#cards = new CardCollection()
     this.#initCards(itemsList);
     this.#gameInitialized = true;
     renderUtils.renderCards(this.#renderCards)
-    return {cards: this.#renderCards, xLength: this.#xLength, yLength: this.#yLength};
+    return { cards: this.#renderCards, xLength: this.#getXLength(), yLength: this.#getYLength()};
   };
 
   handleCardSelected (x, y) {
+    validationUtils.validXY(x, y, this.#getXLength(), this.#getYLength());
     renderUtils.renderSelected(x, y);
     if (!this.#isSelectedCardValid(x, y)) {
-      return { cardData: null, cardMatch: null, isThereAWinner: this.#isThereAWinner };
+      return { cards: this.#renderCards, selectedCardData: null, cardMatch: null };
     }
     const cardData = this.#cards.selectCard(`${x}_${y}`);
     this.#updateRenderCard(x, y)
     renderUtils.renderCards(this.#renderCards)
     const cardMatch = this.#handleCardsMatch(x, y);
     this.#verifyWinner();
-    return { cardData, cardMatch, isThereAWinner: this.#isThereAWinner };
+    return { cards: this.#renderCards, selectedCardData: cardData, cardMatch };
   };
 
   getIsThereAWinner () {
     return this.#isThereAWinner;
   };
 
-  getXLength () {
-    return this.#xLength;
-  };
-
-  getYLength () {
-    return this.#yLength;
-  };
 
   getInitialized () {
     return this.#gameInitialized;
@@ -133,7 +130,16 @@ class MemoryGame {
 
   #updateRenderCard (x, y) {
     this.#renderCards[x][y] = this.#cards.getCard(`${x}_${y}`).getBack().name;
-  }
+  };
+
+  #getXLength () {
+    return this.#xLength;
+  };
+
+  #getYLength () {
+    return this.#yLength;
+  };
+
 };
 
 export default MemoryGame;
