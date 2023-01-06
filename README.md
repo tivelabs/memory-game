@@ -60,14 +60,13 @@
         - x must be a number representing the x position (vertical position) on the 2d array.
         - y must be a number representing the y position (horizontal position) on the 2d array.
 
-    - handleCardSelected returns an object with four properties:
+    - handleCardSelected returns an object with three properties:
 
     ```js
     {
         cards,
         selectedCardData,
         cardMatch,
-        isThereAWinner,
     }
     ```
 
@@ -84,8 +83,6 @@
         }
     }
     ```
-
-    - isThereAWinner: Contains a boolean value indicating if the player won the game. 
 
 5. ### Verify winner
 

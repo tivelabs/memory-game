@@ -65,15 +65,15 @@ class CardCollection {
     return twins;
   };
 
-  #setCardsSelected (key) {
+  #setCardsSelected = (key) => {
     this.#cardsSelected.push(key)
   };
 
-  #cardsMatchesAdd () {
+  #cardsMatchesAdd = () => {
     this.#matches++;
   };
 
-  #cardsSelectedAdd () {
+  #cardsSelectedAdd = () => {
     this.#selected++;
   };
 }

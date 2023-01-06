@@ -52,28 +52,28 @@ class Card {
     return match;
   }
 
-  #setBack (data) {
+  #setBack = (data) => {
     this.#back = data;
   };
 
-  #setFlipped (data) {
+  #setFlipped = (data) => {
     this.#flipped = data;
   };
 
-  #setSelected (data) {
+  #setSelected = (data) => {
     this.#selected = data;
   };
 
-  #setMatched (data) {
+  #setMatched = (data) => {
     this.#matched = data;
   };
 
-  #flipToHide () {
+  #flipToHide = () => {
     this.#setBack(memoryConstants.hiddenCardSymbol);
     this.#setFlipped(false);
   };
 
-  #flipToDiscover () {
+  #flipToDiscover = () => {
     this.#setBack(this.#front);
     this.#setFlipped(true)
   };

@@ -30,11 +30,11 @@ class MemoryGame {
     this.#initCards(itemsList);
     this.#gameInitialized = true;
     renderUtils.renderCards(this.#renderCards)
-    return { cards: this.#renderCards, xLength: this.#getXLength(), yLength: this.#getYLength()};
+    return { cards: this.#renderCards, xLength: this.#xLength, yLength: this.#yLength};
   };
 
   handleCardSelected (x, y) {
-    validationUtils.validXY(x, y, this.#getXLength(), this.#getYLength());
+    validationUtils.validXY(x, y, this.#xLength, this.#yLength);
     renderUtils.renderSelected(x, y);
     if (!this.#isSelectedCardValid(x, y)) {
       return { cards: this.#renderCards, selectedCardData: null, cardMatch: null };
@@ -56,7 +56,7 @@ class MemoryGame {
     return this.#gameInitialized;
   };
 
-  #initCards (randomItems) {
+  #initCards = (randomItems) => {
     let count = 0;
     this.#yLength = memoryConstants.hLength;
     this.#xLength = randomItems.length/this.#yLength;
@@ -73,7 +73,7 @@ class MemoryGame {
     }
   };
 
-  #clearSelectedCards (key1, key2) {
+  #clearSelectedCards = (key1, key2) => {
     this.#cards.unselectCard(`${key1}`);
     this.#cards.unselectCard(`${key2}`);
     this.#cards.clearCardsSelected()
@@ -82,7 +82,7 @@ class MemoryGame {
     renderUtils.renderCards(this.#renderCards)
   };
 
-  #handleCardsMatch (x, y) {
+  #handleCardsMatch = (x, y) => {
     const selected = this.#verifyCardsSelected(x, y);
     if (selected.counter < 2) {
       return;
@@ -101,11 +101,11 @@ class MemoryGame {
     }
   };
 
-  #verifyWinner () {
+  #verifyWinner = () => {
     this.#isThereAWinner = (this.#cards.cardsLength() === this.#cards.getMatches()*2)
   };
 
-  #verifyCardsSelected (x, y) {
+  #verifyCardsSelected = (x, y) => {
     let counter = 0;
     let selected1 = '';
     let selected2 = '';
@@ -118,7 +118,7 @@ class MemoryGame {
     return {counter, selected1, selected2}
   };
 
-  #isSelectedCardValid (x, y) {
+  #isSelectedCardValid = (x, y) => {
     let counter = this.#cards.getSelected();
     let isSelected = this.#cards.getCard(`${x}_${y}`).isSelected();
     let isMatched = this.#cards.getCard(`${x}_${y}`).isMatched();
@@ -128,18 +128,9 @@ class MemoryGame {
       this.#isThereAWinner);
   };
 
-  #updateRenderCard (x, y) {
+  #updateRenderCard = (x, y) => {
     this.#renderCards[x][y] = this.#cards.getCard(`${x}_${y}`).getBack().name;
   };
-
-  #getXLength () {
-    return this.#xLength;
-  };
-
-  #getYLength () {
-    return this.#yLength;
-  };
-
 };
 
 export default MemoryGame;
