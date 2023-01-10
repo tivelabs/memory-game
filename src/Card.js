@@ -5,18 +5,22 @@ class Card {
   #back;
   #selected;
   #matched;
-  #flipped; 
+  #flipped;
 
   constructor (frontData) {
     this.#front = frontData;
     this.#back = memoryConstants.hiddenCardSymbol;
     this.#selected = false;
     this.#matched = false;
-    this.#flipped = false;  
+    this.#flipped = false;
   }
 
   getBack () {
     return this.#back;
+  };
+
+  getFront () {
+    return this.#front;
   };
 
   isSelected () {
@@ -48,7 +52,7 @@ class Card {
     if (match) {
       this.#setMatched(match);
       return match;
-    } 
+    }
     return match;
   }
 

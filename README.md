@@ -38,11 +38,12 @@
         - Category must be 'animals' or 'numbers'
         - Level must be 'easy' or 'medium' or 'hard'
 
-    - initGame returns an object with an array of hidden cards (cards), and the length of the array (xLength and yLength):
+    - initGame returns an object with an array of hidden cards (cards), an array with the entire cards data, and the length of the array (xLength and yLength):
 
     ```js
     {
         cards,
+        cardsResult,
         xLength,
         yLength
     }
@@ -73,7 +74,7 @@
     - cards: Contains the updated array of cards.
     - selectedCardData: Contains an object with the data of the discovered card (id, name, shortName)
     - cardMatch: Contains an object with a boolean value (isNewMatched) that indicates if exist a new card match, and an object (matchedCards) with the positions of the matched cards (x_y):
-    
+
     ```js
     {
         isNewMatched,

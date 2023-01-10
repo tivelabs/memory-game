@@ -21,7 +21,7 @@ class CardCollection {
   getCard (key) {
     return this.hasCard(key) ? this.cards[key] : undefined;
   };
-  
+
   getMatches () {
     return this.#matches;
   };

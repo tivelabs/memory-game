@@ -12,6 +12,7 @@ class MemoryGame {
   #xLength;
   #yLength;
   #cards;
+  #cardsResult;
 
   constructor () {
     this.#gameInitialized = false;
@@ -20,6 +21,7 @@ class MemoryGame {
     this.#xLength = 0;
     this.#yLength = 0;
     this.#cards = {};
+    this.#cardsResult = []
   };
 
   initGame (itemsType, levelValue) {
@@ -30,7 +32,7 @@ class MemoryGame {
     this.#initCards(itemsList);
     this.#gameInitialized = true;
     renderUtils.renderCards(this.#renderCards)
-    return { cards: this.#renderCards, xLength: this.#xLength, yLength: this.#yLength};
+    return { cards: this.#renderCards, cardsResult: this.#cardsResult, xLength: this.#xLength, yLength: this.#yLength};
   };
 
   handleCardSelected (x, y) {
@@ -63,12 +65,14 @@ class MemoryGame {
     this.#renderCards = new Array(this.#xLength);
     for (let i = 0; i < this.#renderCards.length; i++) {
       this.#renderCards[i] = new Array(this.#yLength);
+      this.#cardsResult[i] = new Array(this.#yLength);
     }
     for (let i = 0; i < this.#xLength; i++) {
       for (let j = 0; j < this.#yLength; j++) {
         this.#cards.setCard(`${i}_${j}`, new Card(randomItems[count]))
         count++;
         this.#updateRenderCard(i, j);
+        this.#cardsResult[i][j] = this.#cards.getCard(`${i}_${j}`).getFront();
       }
     }
   };
