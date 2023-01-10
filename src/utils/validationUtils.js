@@ -5,15 +5,15 @@ const validCategory = (inputCategory) => {
   const isString = typeof inputCategory;
   if (isString !== 'string') {
     throw new Error('Category must be a string');
-  }; 
-  memoryConstants.categories.forEach((item, idx) => {
+  };
+  memoryConstants.categories.forEach((item) => {
     inputCategory === item.name && (category = item.name);
   })
   if (category) {
     return category;
   } else {
     throw new Error('Invalid Category');
-  } 
+  }
 };
 
 const validLevel = (inputLevel) => {
@@ -21,15 +21,15 @@ const validLevel = (inputLevel) => {
   const isString = typeof inputLevel;
   if (isString !== 'string') {
     throw new Error('Level must be a string');
-  }; 
-  memoryConstants.levels.forEach((item, idx) => {
-    inputLevel === item.name  && (level = item.value); 
+  };
+  memoryConstants.levels.forEach((item) => {
+    inputLevel === item.name  && (level = item.value);
   })
   if (level) {
     return level;
   } else {
     throw new Error('Invalid Level');
-  }; 
+  };
 };
 
 const validXY = (x, y, xLength, yLength) => {
@@ -38,19 +38,19 @@ const validXY = (x, y, xLength, yLength) => {
   }
   if(!(x >= 0 && x <= xLength-1)) {
     throw new Error(`The x value must be between 0 - ${xLength-1}`);
-  } 
+  }
   if(!(y >= 0 && y <= yLength-1)) {
     throw new Error(`The x value must be between 0 - ${yLength-1}`);
-  } 
+  }
   return {
     positionX: x,
     positionY: y,
-  }            
+  }
 };
 
 const validMenuCategory = (inputCategory) => {
   let category = null;
-  memoryConstants.categories.forEach((item, idx) => {
+  memoryConstants.categories.forEach((item) => {
     inputCategory === item.menuOption && (category = item.name);
   })
   return category;
@@ -58,8 +58,8 @@ const validMenuCategory = (inputCategory) => {
 
 const validMenuLevel = (inputLevel) => {
   let level = null;
-  memoryConstants.levels.forEach((item, idx) => {
-    item.menuOption === inputLevel && (level = item.name); 
+  memoryConstants.levels.forEach((item) => {
+    item.menuOption === inputLevel && (level = item.name);
   })
   return level;
 };
@@ -74,12 +74,12 @@ const validMenuXY = (position, xLength, yLength) => {
       positionY = parseInt(positionArray[2]);
       if(isNaN(positionX) || isNaN(positionY) || !(positionX >= 0 && positionX <= xLength-1) || !(positionY >= 0 && positionY <= yLength-1)) {
         return {valid: false};
-      } 
+      }
       return {
         valid: true,
         positionX,
         positionY,
-      }            
+      }
     } else {
       return {valid: false};
     }

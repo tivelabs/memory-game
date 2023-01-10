@@ -4,7 +4,7 @@ import { stdin as input, stdout as output } from 'node:process';
 const rl = readline.createInterface({ input, output });
 
 const ask = (questionText) => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     rl.question(questionText, resolve);
   });
 };

@@ -87,7 +87,7 @@ class MemoryGame {
   };
 
   #handleCardsMatch = (x, y) => {
-    const selected = this.#verifyCardsSelected(x, y);
+    const selected = this.#verifyCardsSelected();
     if (selected.counter < 2) {
       return;
     }
@@ -109,8 +109,8 @@ class MemoryGame {
     this.#isThereAWinner = (this.#cards.cardsLength() === this.#cards.getMatches()*2)
   };
 
-  #verifyCardsSelected = (x, y) => {
-    let counter = 0;
+  #verifyCardsSelected = () => {
+    let counter = null;
     let selected1 = '';
     let selected2 = '';
     counter = this.#cards.getSelected();
@@ -118,7 +118,7 @@ class MemoryGame {
     if (selected.length === 2) {
       selected1 = selected[1];
       selected2 = selected[0];
-    } 
+    }
     return {counter, selected1, selected2}
   };
 
