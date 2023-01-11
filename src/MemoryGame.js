@@ -110,10 +110,9 @@ class MemoryGame {
   };
 
   #verifyCardsSelected = () => {
-    let counter = null;
     let selected1 = '';
     let selected2 = '';
-    counter = this.#cards.getSelected();
+    let counter = this.#cards.getSelected();
     let selected = this.#cards.getCardsSelected();
     if (selected.length === 2) {
       selected1 = selected[1];
@@ -135,6 +134,6 @@ class MemoryGame {
   #updateRenderCard = (x, y) => {
     this.#renderCards[x][y] = this.#cards.getCard(`${x}_${y}`).getBack().name;
   };
-};
+}
 
 export default MemoryGame;

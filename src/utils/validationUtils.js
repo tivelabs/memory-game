@@ -5,7 +5,7 @@ const validCategory = (inputCategory) => {
   const isString = typeof inputCategory;
   if (isString !== 'string') {
     throw new Error('Category must be a string');
-  };
+  }
   memoryConstants.categories.forEach((item) => {
     inputCategory === item.name && (category = item.name);
   })
@@ -21,7 +21,7 @@ const validLevel = (inputLevel) => {
   const isString = typeof inputLevel;
   if (isString !== 'string') {
     throw new Error('Level must be a string');
-  };
+  }
   memoryConstants.levels.forEach((item) => {
     inputLevel === item.name  && (level = item.value);
   })
@@ -29,7 +29,7 @@ const validLevel = (inputLevel) => {
     return level;
   } else {
     throw new Error('Invalid Level');
-  };
+  }
 };
 
 const validXY = (x, y, xLength, yLength) => {
